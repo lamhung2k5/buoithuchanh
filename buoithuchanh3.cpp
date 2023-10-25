@@ -117,18 +117,16 @@ void chen(int *a, int n){
 }
 
 void xoa(int *a, int n){
-	int *p, k = 0, x;
-	p = a;
+	int k = 0, x;
 	printf("\nnhap phan tu can xoa: ");
 	scanf("%d",&x);
 	for(int i = 0; i <= n; i++){
-		if(*(p+i) != x){
-			*(p+k) = *(p+i);
+		if(*(a+i) != x){
+			*(a+k) = *(a+i);
 			k++;
 		}
 	}
 	n = k;
-	p = (int*)realloc(a,n*sizeof(int));
 	printf("\nmang sau khi xoa: ");
 	xuat(a,n);
 }
@@ -154,4 +152,5 @@ int main(){
 	chen(a,n);
 	xoa(a,n);
 	free(a);
+	return 0;
 }
