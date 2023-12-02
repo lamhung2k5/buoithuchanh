@@ -20,7 +20,7 @@ void tongcheochinh(int a[][205],int m,int n);//tinh tong duong cheo chinh
 void demchan(int a[][205],int m,int n);//dem so chan tam giac tren khong tinh duong cheo chinh
 void demle(int a[][205],int m,int n);//tim va in ra cac so le nam trong tam giac duoi cua dduong cheo phu (tinh duong cheo phu)
 void tongmatran(int a1[][205],int b1[][205],int c[][205],int m,int n);//tinh tong hai ma tran
-void tichmatran(int a1[][205],int b1[][205],int t[][205],int m,int n,int n1);//tinh tong hai ma tran
+void tichmatran(int a1[][205],int b1[][205],int t[][205],int m,int n,int n1);//tinh tich hai ma tran
 
 //cac ham phu
 
@@ -57,7 +57,7 @@ int max_col(int a[][205],int dong,int cot,int m,int n){
 
 //ham de bai
 
-void id(int a[][205],int m,int n){
+void id(int a[205][205],int m,int n){
 	for(int i = 0; i < m; i++){
 		for(int j = 0; j < n; j++){
 			printf("a[%d][%d] = ",i,j);
@@ -242,22 +242,26 @@ void demle(int a[][205],int m,int n){
 }
 
 void tongmatran(int a1[][205],int b1[][205],int c[][205],int m,int n){
+	printf("\ntong hai ma tran:\n");
 	for(int i = 0; i < m; i++){
 		for(int j = 0; j < n; j++){
-				c[i][j] = a1[i][j] + b1[i][j];
-			}
+			c[i][j] = a1[i][j] + b1[i][j];
 		}
+	}
+	pm(c,m,n);
+	
 }
 
-void tichmatran(int a1[][205],int b1[][205],int t[][205],int m,int n,int n1){
-	for(int i=0;i<m;i++){
-		for(int j=0;j<n1;j++){
+void tichmatran(int a1[][205],int b1[][205],int t[][205],int m1,int n1,int n2){
+	for(int i =0; i < m1; i++){
+		for(int j = 0; i < n2; j++){
 			t[i][j]=0;
-			for(int k=0;k<n;k++){
-				t[i][j]+=a1[i][k]*b1[k][j];
+			for(int k = 0; k < n1;k++){
+				t[i][j] += a1[i][k]*b1[k][j];
 			}
 		}
 	}
+	pm(t,m1,n2);
 }
 
 //chuong trinh chinh
@@ -293,38 +297,50 @@ int main(){
 	tongcheochinh(a,m,n);
 	demchan(a,m,n);
 	demle(a,m,n);
-	int a1[205][205],b1[205][205],c[205][205],t[205][205],ma,mb,na,nb;
-	printf("\nnhap ma tran A: \n");
+	printf("\n-------------------------------");
+	int a1[205][205],b1[205][205],c[205][205],t[205][205],m1,m2,n1,n2;
+	printf("\nnhap ma tran a:");
 	do{
 		printf("\nnhap so hang: ");
-		scanf("%d",&ma);
-		if((ma<0)||(ma>205)){
+		scanf("%d",&m1);
+		if((m1<0)||(m1>205)){
 			printf("\nso hang khong hop le, vui long nhap lai.");
 		}
-	}while((ma<0)||(ma>205));
+	}while((m1<0)||(m1>205));
 	do{
 		printf("\nnhap so cot: ");
-		scanf("%d",&na);
-		if((na<0)||(na>205)){
+		scanf("%d",&n1);
+		if((n1<0)||(n1>205)){
 			printf("\nso cot khong hop le, vui long nhap lai.");
 		}
-	}while((na<0)||(na>205));
-	id(a1,ma,na);
-	printf("\nnhap ma tran B: \n");
+	}while((n1<0)||(n1>205));
+	id(a1,m1,n1);
+	
+	printf("\nnhap ma tran b:");
 	do{
 		printf("\nnhap so hang: ");
-		scanf("%d",&mb);
-		if((mb<0)||(mb>205)){
+		scanf("%d",&m2);
+		if((m2<0)||(m2>205)){
 			printf("\nso hang khong hop le, vui long nhap lai.");
 		}
-	}while((mb<0)||(mb>205));
+	}while((m2<0)||(m2>205));
 	do{
 		printf("\nnhap so cot: ");
-		scanf("%d",&nb);
-		if((nb<0)||(nb>205)){
+		scanf("%d",&n2);
+		if((n2<0)||(n2>205)){
 			printf("\nso cot khong hop le, vui long nhap lai.");
 		}
-	}while((nb<0)||(nb>205));
-	id(b1,mb,nb);
-
+	}while((n2<0)||(n2>205));
+	id(b1,m2,n2);
+	if((m1==m2)&&(n1==n2)){
+		tongmatran(a1,b1,c,m1,n1);	
+	}else{
+		printf("\nkhong the cong hai ma tran");
+	}
+	
+	if(n1==m2){
+		tichmatran(a1,b1,t,m1,n1,n2);
+	}else{
+		printf("\nkhong the nhan hai ma tran.");
+	}
 }
