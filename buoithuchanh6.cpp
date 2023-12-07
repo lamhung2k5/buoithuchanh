@@ -19,6 +19,9 @@ void nhap(sv a[], int n);
 void nhapthongtin(sv &x);
 void xuat(sv a[], int n);
 void xuatthongtin(sv x);
+void sapxep(sv a[], int n);
+void inhsgxs(sv a[], int n); 
+void timkiem(int a[], int n); 
 
 void nhapthongtin(sv &x){
 	fflush(stdin);
@@ -57,6 +60,9 @@ void nhapthongtin(sv &x){
 	if(x.kqcuoikhoa>1.5&&x.kqcuoikhoa<=2.5){
 		strcpy(x.xeploai,"TRUNG BINH");
 	}
+	if(x.kqcuoikhoa>2.5&&x.kqcuoikhoa<=3.0){
+		strcpy(x.xeploai,"KHA");
+	}
 	if(x.kqcuoikhoa>3.0&&x.kqcuoikhoa<=3.8){
 		strcpy(x.xeploai,"GIOI");
 	}
@@ -73,17 +79,73 @@ void nhap(sv a[], int n){
 }
 
 void xuatthongtin(sv x){
-		printf("|%5s|%-18s|%-6s|%10d|%-11s|%12.1f|%-10s|%-10s|",x.mssv,x.hoten,x.phai,x.namsinh,x.nganhhoc,x.kqcuoikhoa,x.xeploai,x.quequan);
+		printf("\n|%5s|%-21s|%-6s|%10d|%-11s|%12.1f|%-10s|%-10s|",x.mssv,x.hoten,x.phai,x.namsinh,x.nganhhoc,x.kqcuoikhoa,x.xeploai,x.quequan);
 }
 
 void xuat(sv a[], int n){
 	system("cls");
-	  printf("\n\n|--------------------------------------------------------------------------------------|\n");
- 	printf("|ma SV| ho va ten sinh vien | phai | nam sinh | nganh hoc |Kq cuoi khoa| xep loai | que quan |");
+	  printf("\n\n|--------------------------------------------------------------------------------------------|");
+    	printf("\n|ma SV| ho va ten sinh vien | phai | nam sinh | nganh hoc |Kq cuoi khoa| xep loai | que quan |");
  	for(int i = 0; i < n; i++){
   printf("\n|-----|---------------------|------|----------|-----------|------------|----------|----------|");
     xuatthongtin(a[i]);
 	 }
+}
+
+void sapxep(sv a[], int n){
+	system("cls"); 
+	sv temp;
+	for(int i = 0; i < n; i++){
+		for(int j = i+1; j < n; j++){
+			if(a[i].kqcuoikhoa > a[j].kqcuoikhoa){
+				temp = a[i];
+				a[i]=a[j];
+				a[j]=temp; 
+			} 
+			 
+		} 
+	} 
+	xuat(a,n); 
+}
+
+void inhsgxs(sv a[], int n){
+	system("cls");
+	sv dshs[10]; 
+	int cnt; 
+	for(int i = 0; i < n; i++){
+		if(a[i].kqcuoikhoa>3.0){
+			dshs[i]=a[i]; 
+			cnt++;
+		}
+	} 
+	if(cnt != 0){
+		xuat(dshs,cnt); 		
+	}else{
+		printf("\nkhong co sinh vien can tim");
+	} 
+
+}
+
+void timkiem(sv a[], int n){
+	system("cls");
+	fflush(stdin); 
+	char ma[10]; 
+	sv dshs[10]; 
+	int cnt; 
+	printf("\nnhap ma so sinh vien can kiem tra");
+	gets(ma);
+	
+	for(int i = 0; i< n; i++){
+		if(strcmp(a[i].mssv,ma)==0){
+			dshs[i]=a[i];
+			cnt++; 
+		} 
+	} 
+	if(cnt != 0){
+		xuat(dshs,cnt); 	
+	}else{
+		printf("\nkhong tim thay sinh vien.");
+	} 
 }
 
 int main(){
@@ -117,6 +179,28 @@ int main(){
 				printf("\nnhan phim bat ki de tiep tuc!");
 				getch();
 				break;	
+			case 3:
+				sapxep(a,n); 
+				printf("\nnhan phim bat ki de tiep tuc!");
+				getch();
+				break;
+			case 4:
+				inhsgxs(a,n);
+				printf("\nnhan phim bat ki de tiep tuc!");
+				getch();
+				break;
+			case 5:
+				timkiem(a,n); 
+				printf("\nnhan phim bat ki de tiep tuc!");
+				getch();
+				break;
+			case 0:
+				exit(1);
+			default:
+				printf("\nkhong co yeu cau nay"); 
+				printf("\nnhan phim bat ki de tiep tuc!");
+				getch();
+				break;
 		}
 		
 	}
