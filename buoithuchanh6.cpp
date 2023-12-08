@@ -87,7 +87,7 @@ void xuat(sv a[], int n){
 	  printf("\n\n|--------------------------------------------------------------------------------------------|");
     	printf("\n|ma SV| ho va ten sinh vien | phai | nam sinh | nganh hoc |Kq cuoi khoa| xep loai | que quan |");
  	for(int i = 0; i < n; i++){
-  printf("\n|-----|---------------------|------|----------|-----------|------------|----------|----------|");
+        printf("\n|-----|---------------------|------|----------|-----------|------------|----------|----------|");
     xuatthongtin(a[i]);
 	 }
 }
@@ -112,16 +112,18 @@ void inhsgxs(sv a[], int n){
 	system("cls");
 	sv dshs[10]; 
 	int cnt; 
+  printf("\n\n|--------------------------------------------------------------------------------------------|");
+ 	printf("\n|ma SV| ho va ten sinh vien | phai | nam sinh | nganh hoc |Kq cuoi khoa| xep loai | que quan |");
 	for(int i = 0; i < n; i++){
 		if(a[i].kqcuoikhoa>3.0){
-			dshs[i]=a[i]; 
-			cnt++;
+			printf("\n|-----|---------------------|------|----------|-----------|------------|----------|----------|");
+    xuatthongtin(a[i]);
+    	cnt++;
 		}
 	} 
-	if(cnt != 0){
-		xuat(dshs,cnt); 		
-	}else{
-		printf("\nkhong co sinh vien can tim");
+	if(cnt== 0){
+		system("cls");
+		printf("\nkhong co sv theo yeu cau");
 	} 
 
 }
@@ -130,22 +132,23 @@ void timkiem(sv a[], int n){
 	system("cls");
 	fflush(stdin); 
 	char ma[10]; 
-	sv dshs[10]; 
-	int cnt; 
-	printf("\nnhap ma so sinh vien can kiem tra");
+	printf("\nnhap ma so sinh vien can kiem tra: ");
 	gets(ma);
-	
+	int cnt;
+  printf("\n\n|--------------------------------------------------------------------------------------------|");
+   	printf("\n|ma SV| ho va ten sinh vien | phai | nam sinh | nganh hoc |Kq cuoi khoa| xep loai | que quan |");
+   	
 	for(int i = 0; i< n; i++){
 		if(strcmp(a[i].mssv,ma)==0){
-			dshs[i]=a[i];
-			cnt++; 
+			printf("\n|-----|---------------------|------|----------|-----------|------------|----------|----------|");
+    xuatthongtin(a[i]);
+    	cnt++;
 		} 
 	} 
-	if(cnt != 0){
-		xuat(dshs,cnt); 	
-	}else{
-		printf("\nkhong tim thay sinh vien.");
-	} 
+	if(cnt==0){
+		system("cls");
+		printf("\nkhong tim thay sinh vien!");
+	}
 }
 
 int main(){
